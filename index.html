@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>GlassCircuits — Neo-Fae Design Studio</title>
-  <meta name="description" content="GlassCircuits: angelic, ethereal EPKs and visual design — blending neo-fae aesthetics, PNW atmosphere, and soft glassmorphism." />
+  <title>GlassCircuits — Design by Emily</title>
+  <meta name="description" content="GlassCircuits Design — ethereal web design and branding by Emily. Blending artistry, code, and neo-fae atmospheres." />
   <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
@@ -17,12 +17,9 @@
             haze: "#f6f3f8",
             lilac: "#d9c8e9",
             mauve: "#b8a4ce",
-            rose: "#e7d5e5",
-            mist: "rgba(255,255,255,0.5)"
+            rose: "#e7d5e5"
           },
-          boxShadow: {
-            aurora: "0 0 60px rgba(216,200,230,0.25)",
-          }
+          boxShadow: { aurora: "0 0 60px rgba(216,200,230,0.25)" }
         }
       }
     }
@@ -30,8 +27,9 @@
   <style>
     html { scroll-behavior: smooth; }
     body {
-      background: radial-gradient(1200px 700px at 50% -20%, rgba(200,180,220,0.15), transparent 60%), 
-                  linear-gradient(to bottom right, #faf9fb, #f7f4f8);
+      background:
+        radial-gradient(1200px 700px at 50% -20%, rgba(200,180,220,0.12), transparent 60%),
+        linear-gradient(to bottom right, #faf9fb, #f7f4f8);
       color: #3a2b45;
     }
     .glass {
@@ -41,137 +39,455 @@
       box-shadow: 0 8px 32px rgba(190,170,210,0.1);
     }
     .hover-glow { transition: all .25s ease; }
-    .hover-glow:hover { transform: translateY(-2px); filter: brightness(1.1); }
-    .halo {
-      background: radial-gradient(circle at 50% 40%, rgba(210,190,230,0.25), transparent 70%);
+    .hover-glow:hover { transform: translateY(-2px); filter: brightness(1.06); }
+    .reveal { opacity: 0; transform: translateY(26px); transition: opacity .7s ease, transform .7s cubic-bezier(.2,.65,.2,1); }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* Fullscreen overlay menu */
+    .hamburger span { transition: transform .25s ease, opacity .25s ease; }
+    .hamburger.active span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .hamburger.active span:nth-child(2) { opacity: 0; }
+    .hamburger.active span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .menu-overlay {
+      backdrop-filter: blur(28px) saturate(180%);
+      background: radial-gradient(800px 600px at 70% 20%, rgba(217,200,233,.25), transparent 60%), rgba(255,255,255,.80);
+      transition: opacity .25s ease;
     }
+    .menu-link { opacity: 0; transform: translateY(10px); transition: opacity .4s ease, transform .4s ease; }
+    .menu-link.show { opacity: 1; transform: translateY(0); }
+    .no-scroll { overflow: hidden; height: 100vh; }
+
+    /* Multi-step form */
+    .step { display: none; }
+    .step.active { display: block; }
+    .progress {
+      height: 8px; border-radius: 9999px; overflow: hidden; background: rgba(184,164,206,.25);
+    }
+    .progress-bar { height: 100%; width: 0%; background: #b8a4ce; transition: width .4s ease; }
+    .oval-mask { clip-path: ellipse(50% 45% at 50% 50%); }
+    .error { border-color: #ef4444 !important; }
+    .hint { font-size: .8rem; color: #6b4e7e; }
   </style>
 </head>
 
 <body class="font-sans">
 
 <!-- Header -->
-<header class="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40">
+<header class="fixed inset-x-0 top-0 z-50 bg-white/75 backdrop-blur-xl border-b border-white/40">
   <div class="mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
     <a href="#home" class="text-lg font-semibold tracking-wide text-mauve">GlassCircuits</a>
+
+    <!-- Desktop Nav -->
     <nav class="hidden md:flex gap-6 text-sm text-mauve/90">
       <a href="#about" class="hover-glow">About</a>
       <a href="#services" class="hover-glow">Services</a>
-      <a href="#aura" class="hover-glow">Aesthetic</a>
-      <a href="#contact" class="hover-glow">Contact</a>
+      <a href="#projects" class="hover-glow">Projects</a>
+      <a href="#templates" class="hover-glow">Templates</a>
+      <a href="#contact" class="hover-glow">Start a Project</a>
     </nav>
+
+    <!-- Hamburger -->
+    <button id="menu-btn" class="hamburger md:hidden flex flex-col gap-1.5 cursor-pointer p-2" aria-controls="overlay" aria-expanded="false" aria-label="Open menu">
+      <span class="w-6 h-0.5 bg-mauve"></span>
+      <span class="w-6 h-0.5 bg-mauve"></span>
+      <span class="w-6 h-0.5 bg-mauve"></span>
+    </button>
   </div>
 </header>
 
-<!-- Hero -->
-<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 halo">
-  <h1 class="text-5xl md:text-6xl font-serif font-semibold text-mauve mb-4 leading-tight">Designs that Feel Like Light</h1>
-  <p class="text-mauve/80 text-lg max-w-xl">GlassCircuits creates ethereal EPKs and brand visuals that shimmer between digital and dream — where glass meets air and color meets quiet.</p>
-  <div class="mt-8 flex justify-center gap-4">
-    <a href="#aura" class="hover-glow rounded-xl bg-mauve text-white px-5 py-2.5 font-semibold shadow-aurora">See the Aesthetic</a>
-    <a href="#contact" class="hover-glow rounded-xl border border-mauve text-mauve px-5 py-2.5 font-semibold">Work Together</a>
+<!-- Fullscreen Mobile Menu -->
+<div id="overlay" class="menu-overlay fixed inset-0 z-40 opacity-0 pointer-events-none">
+  <div class="flex flex-col h-full">
+    <div class="flex items-center justify-between px-6 py-5">
+      <span class="text-mauve font-semibold">GlassCircuits</span>
+      <button id="close-overlay" class="hamburger active flex flex-col gap-1.5 p-2" aria-label="Close menu">
+        <span class="w-6 h-0.5 bg-mauve"></span>
+        <span class="w-6 h-0.5 bg-mauve opacity-0"></span>
+        <span class="w-6 h-0.5 bg-mauve"></span>
+      </button>
+    </div>
+    <div class="flex-1 flex flex-col items-center justify-center gap-4 text-center px-6">
+      <a href="#about" class="menu-link text-3xl text-mauve font-serif">About</a>
+      <a href="#services" class="menu-link text-3xl text-mauve font-serif">Services</a>
+      <a href="#projects" class="menu-link text-3xl text-mauve font-serif">Projects</a>
+      <a href="#templates" class="menu-link text-3xl text-mauve font-serif">Templates</a>
+      <a href="#contact" class="menu-link mt-3 inline-block bg-mauve text-white px-6 py-3 rounded-2xl shadow-aurora hover-glow">Start a Project</a>
+      <a href="mailto:glasscircuitsdesign@gmail.com" class="menu-link text-mauve/80 underline mt-2">glasscircuitsdesign@gmail.com</a>
+    </div>
+    <div class="px-6 pb-8 text-center text-sm text-mauve/70">© <span id="year1"></span> GlassCircuits</div>
   </div>
-  <div class="mt-20 w-64 h-64 rounded-full bg-gradient-to-br from-rose via-lilac to-mauve opacity-40 blur-3xl absolute"></div>
+</div>
+
+<!-- Hero -->
+<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative">
+  <h1 class="text-5xl md:text-6xl font-serif font-semibold text-mauve mb-4 leading-tight">Designs that Feel Like Light</h1>
+  <p class="text-mauve/80 text-lg max-w-xl">Emily creates luminous digital experiences that blend art, technology, and atmosphere — for dreamers, artists, and storytellers.</p>
+  <div class="mt-8 flex justify-center gap-4">
+    <a href="#projects" class="hover-glow rounded-xl bg-mauve text-white px-5 py-2.5 font-semibold shadow-aurora">View Projects</a>
+    <a href="#contact" class="hover-glow rounded-xl border border-mauve text-mauve px-5 py-2.5 font-semibold">Start a Project</a>
+  </div>
 </section>
 
 <!-- About -->
 <section id="about" class="py-24 bg-pearl/70 relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-br from-lilac/10 via-transparent to-rose/10 blur-3xl"></div>
-  <div class="max-w-5xl mx-auto px-6 glass rounded-3xl p-10 relative z-10">
-    <h2 class="text-3xl font-serif text-mauve mb-3">About GlassCircuits</h2>
+  <div class="max-w-5xl mx-auto px-6 glass rounded-3xl p-10 relative z-10 text-center">
+    <img src="your-profile.jpg" alt="Emily profile" class="mx-auto w-44 h-44 object-cover rounded-full mb-6 oval-mask">
+    <h2 class="text-3xl font-serif text-mauve mb-3">About Emily</h2>
     <p class="text-mauve/80 leading-relaxed">
-      Born in the PNW fog, GlassCircuits is a studio for those who design from intuition and light.  
-      We craft press kits, brand systems, and ethereal visuals that shimmer like reflections — minimalist, fluid, and intentionally magical.  
-      Every piece feels like morning mist over quartz.
+      I’m Emily — the creative behind GlassCircuits Design. I merge digital precision with intuitive artistry.
+      With a background in <strong>Graphic Information Technology</strong> and full-stack design, I craft accessible,
+      atmospheric websites, EPKs, and brand systems that shimmer between realism and reverie.
     </p>
   </div>
 </section>
 
 <!-- Services -->
 <section id="services" class="py-24 bg-gradient-to-b from-haze to-pearl">
-  <div class="max-w-6xl mx-auto px-6 text-center">
-    <h2 class="text-3xl font-serif text-mauve mb-6">Offerings</h2>
-    <p class="text-mauve/80 max-w-2xl mx-auto mb-12">Elegant tools for dreamers, artists, and brands — ethereal, professional, and spellbinding.</p>
+  <div class="max-w-6xl mx-auto px-6">
+    <h2 class="text-3xl font-serif text-mauve mb-6 text-center">Services</h2>
+    <p class="text-mauve/80 max-w-2xl mx-auto mb-12 text-center">Clarity + craft. Modular packages for artists, founders, and small teams.</p>
     <div class="grid md:grid-cols-3 gap-6">
-      <div class="glass p-6 rounded-2xl hover-glow">
-        <i class="fa-solid fa-scroll text-2xl text-mauve mb-3"></i>
-        <h3 class="font-semibold text-lg text-mauve">EPKs & Portfolios</h3>
-        <p class="text-sm text-mauve/80 mt-2">For musicians, artists, and creative professionals — crafted like modern relics of light.</p>
+      <div class="glass p-6 rounded-2xl reveal hover-glow">
+        <h3 class="font-semibold text-lg text-mauve">Web Design</h3>
+        <p class="text-sm text-mauve/80 mt-2">Custom, responsive sites in modern stacks. Wireframes → design → build → launch.</p>
+        <ul class="mt-3 text-sm text-mauve/80 list-disc list-inside">
+          <li>Accessibility-first</li><li>Performance tuned</li><li>CMS or static</li>
+        </ul>
       </div>
-      <div class="glass p-6 rounded-2xl hover-glow">
-        <i class="fa-solid fa-palette text-2xl text-mauve mb-3"></i>
-        <h3 class="font-semibold text-lg text-mauve">Visual Identity</h3>
-        <p class="text-sm text-mauve/80 mt-2">Logos, palettes, and typography — aligned with your aura and rhythm, minimalist yet luminous.</p>
+      <div class="glass p-6 rounded-2xl reveal hover-glow">
+        <h3 class="font-semibold text-lg text-mauve">Brand & Visual Systems</h3>
+        <p class="text-sm text-mauve/80 mt-2">Logos, palettes, type, and usage rules. Cohesive identities with room to grow.</p>
+        <ul class="mt-3 text-sm text-mauve/80 list-disc list-inside">
+          <li>Logo + marks</li><li>Style guide</li><li>Asset kit</li>
+        </ul>
       </div>
-      <div class="glass p-6 rounded-2xl hover-glow">
-        <i class="fa-solid fa-sparkles text-2xl text-mauve mb-3"></i>
-        <h3 class="font-semibold text-lg text-mauve">Atmospheric Assets</h3>
-        <p class="text-sm text-mauve/80 mt-2">Social visuals, show flyers, launch templates — serene, misty, timeless.</p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Aesthetic Section -->
-<section id="aura" class="py-24 relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-rose/15 to-lilac/10 blur-2xl"></div>
-  <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
-    <h2 class="text-3xl font-serif text-mauve mb-6">The GlassCircuits Aura</h2>
-    <p class="text-mauve/80 max-w-2xl mx-auto mb-12">A moodboard of air, crystal, and code — inspired by Icelandic fog, fairy circuitry, and slow light.</p>
-    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
-      <div class="glass rounded-3xl h-48 flex items-center justify-center">
-        <span class="text-mauve font-semibold">Soft Mauve</span>
-      </div>
-      <div class="glass rounded-3xl h-48 flex items-center justify-center">
-        <span class="text-mauve font-semibold">Ethereal Light</span>
-      </div>
-      <div class="glass rounded-3xl h-48 flex items-center justify-center">
-        <span class="text-mauve font-semibold">Pacific Mist</span>
-      </div>
-      <div class="glass rounded-3xl h-48 flex items-center justify-center">
-        <span class="text-mauve font-semibold">Pearl Tone</span>
-      </div>
-      <div class="glass rounded-3xl h-48 flex items-center justify-center">
-        <span class="text-mauve font-semibold">Crystal Blur</span>
-      </div>
-      <div class="glass rounded-3xl h-48 flex items-center justify-center">
-        <span class="text-mauve font-semibold">Aurora Glow</span>
+      <div class="glass p-6 rounded-2xl reveal hover-glow">
+        <h3 class="font-semibold text-lg text-mauve">Launch Support</h3>
+        <p class="text-sm text-mauve/80 mt-2">EPKs, landing pages, and content setup so you’re discoverable from day one.</p>
+        <ul class="mt-3 text-sm text-mauve/80 list-disc list-inside">
+          <li>SEO basics</li><li>Analytics</li><li>Maintenance plans</li>
+        </ul>
       </div>
     </div>
   </div>
 </section>
 
-<!-- Contact -->
+<!-- Projects with Filters -->
+<section id="projects" class="py-24">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-serif text-mauve mb-6">Projects</h2>
+    <p class="text-mauve/80 max-w-2xl mx-auto mb-8">Filter by type — each card links directly to a live project.</p>
+
+    <div class="flex flex-wrap justify-center gap-3 mb-12">
+      <button class="filter-btn bg-mauve text-white px-4 py-2 rounded-xl font-medium active" data-filter="all">All</button>
+      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="web">Web</button>
+      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="brand">Brand</button>
+      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="epk">EPK</button>
+    </div>
+
+    <div id="project-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
+      <!-- Web -->
+      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="web">
+        <a href="https://example.com/aurora-archive" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+        <div class="h-40 rounded-xl bg-gradient-to-br from-rose to-lilac opacity-70 mb-4"></div>
+        <h3 class="text-mauve font-semibold text-lg">Aurora Archive</h3>
+        <p class="text-sm text-mauve/80 mt-1">Interactive portfolio for a multimedia artist.</p>
+      </article>
+      <!-- Brand -->
+      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="brand">
+        <a href="https://example.com/liminal-light" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+        <div class="h-40 rounded-xl bg-gradient-to-br from-lilac to-mauve opacity-70 mb-4"></div>
+        <h3 class="text-mauve font-semibold text-lg">Liminal Light</h3>
+        <p class="text-sm text-mauve/80 mt-1">Brand identity + microsite for an ambient project.</p>
+      </article>
+      <!-- EPK -->
+      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="epk">
+        <a href="https://example.com/circuits-collective" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+        <div class="h-40 rounded-xl bg-gradient-to-br from-rose to-mauve opacity-70 mb-4"></div>
+        <h3 class="text-mauve font-semibold text-lg">Circuits Collective</h3>
+        <p class="text-sm text-mauve/80 mt-1">Custom EPK + interactive design for a collective.</p>
+      </article>
+      <!-- Web -->
+      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="web">
+        <a href="https://example.com/frosted-grid" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+        <div class="h-40 rounded-xl bg-gradient-to-br from-lilac to-rose opacity-70 mb-4"></div>
+        <h3 class="text-mauve font-semibold text-lg">Frosted Grid</h3>
+        <p class="text-sm text-mauve/80 mt-1">Experimental responsive layout exploration.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- Templates -->
+<section id="templates" class="py-24 bg-pearl/60">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-serif text-mauve mb-6">Templates</h2>
+    <p class="text-mauve/80 max-w-2xl mx-auto mb-12">Ready-made designs for portfolios, EPKs, and small brands.</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass p-6 rounded-2xl hover-glow reveal">
+        <div class="h-36 rounded-xl bg-gradient-to-br from-rose to-lilac opacity-70 mb-4"></div>
+        <h3 class="font-semibold text-lg text-mauve">Fae Studio</h3>
+        <p class="text-sm text-mauve/80 mt-1">Minimal, pale-toned, animated transitions.</p>
+      </div>
+      <div class="glass p-6 rounded-2xl hover-glow reveal">
+        <div class="h-36 rounded-xl bg-gradient-to-br from-lilac to-mauve opacity-70 mb-4"></div>
+        <h3 class="font-semibold text-lg text-mauve">Opal Glow</h3>
+        <p class="text-sm text-mauve/80 mt-1">Soft gradients + floating type; ideal for music.</p>
+      </div>
+      <div class="glass p-6 rounded-2xl hover-glow reveal">
+        <div class="h-36 rounded-xl bg-gradient-to-br from-rose to-mauve opacity-70 mb-4"></div>
+        <h3 class="font-semibold text-lg text-mauve">Dreamline</h3>
+        <p class="text-sm text-mauve/80 mt-1">Modular layout for visual artists + writers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Client Intake: Multi-step -->
 <section id="contact" class="py-24 bg-haze relative overflow-hidden">
-  <div class="absolute inset-0 bg-gradient-to-tr from-lilac/20 via-transparent to-rose/20 blur-2xl"></div>
-  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
-    <div class="glass rounded-3xl p-10">
-      <h2 class="text-3xl font-serif text-mauve mb-4">Let’s Create Something Radiant</h2>
-      <p class="text-mauve/80 mb-8">Reach out to collaborate on your EPK, brand visuals, or creative project.  
-        Everything begins with light — and a good brief.</p>
-      <form class="max-w-md mx-auto grid gap-4 text-left">
-        <input type="text" placeholder="Your Name" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mauve">
-        <input type="email" placeholder="Your Email" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mauve">
-        <textarea rows="5" placeholder="Tell me about your project..." class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mauve"></textarea>
-        <button type="submit" class="hover-glow w-full bg-mauve text-white font-semibold rounded-xl py-3 shadow-aurora">Send Message</button>
+  <div class="max-w-4xl mx-auto px-6 relative z-10">
+    <div class="glass rounded-3xl p-8 md:p-10">
+      <h2 class="text-3xl font-serif text-mauve mb-1 text-center">Start a Project</h2>
+      <p class="text-mauve/80 mb-6 text-center">A guided brief so I can scope accurately and make your thing glow.</p>
+
+      <!-- Progress -->
+      <div class="progress mb-6"><div id="progressBar" class="progress-bar"></div></div>
+
+      <form id="intakeForm" class="grid gap-6" action="https://formspree.io/f/YOUR_FORM_ID" method="POST">
+        <!-- Step 1: Basics -->
+        <div class="step active" data-step="1">
+          <h3 class="font-serif text-xl text-mauve mb-2">Basics</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <input name="name" type="text" placeholder="Your Name*" required class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+            <input name="email" type="email" placeholder="Your Email*" required class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <input name="brand_or_artist" type="text" placeholder="Brand / Artist Name" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+            <select name="project_type" required class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+              <option value="" disabled selected>Project Type*</option>
+              <option>Web Design</option><option>EPK / Portfolio</option>
+              <option>Brand & Visual System</option><option>Landing Page</option><option>Template Customization</option>
+            </select>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <select name="timeline" required class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+              <option value="" disabled selected>Timeline*</option>
+              <option>ASAP (1–2 weeks)</option><option>3–4 weeks</option><option>5–8 weeks</option><option>Flexible</option>
+            </select>
+            <select name="budget" required class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+              <option value="" disabled selected>Budget Range*</option>
+              <option>&lt;$1,000</option><option>$1,000–$3,000</option><option>$3,000–$6,000</option><option>$6,000+</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Step 2: Vision -->
+        <div class="step" data-step="2">
+          <h3 class="font-serif text-xl text-mauve mb-2">Vision & Aesthetic</h3>
+          <p class="hint mb-2">Choose a few words that fit. You can change later.</p>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-2 gap-2">
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="feel[]" value="Ethereal" class="accent-mauve">Ethereal</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="feel[]" value="Editorial" class="accent-mauve">Editorial</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="feel[]" value="Minimal" class="accent-mauve">Minimal</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="feel[]" value="Bold" class="accent-mauve">Bold</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="feel[]" value="Otherworldly" class="accent-mauve">Otherworldly</label>
+              <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="feel[]" value="Playful" class="accent-mauve">Playful</label>
+            </div>
+            <input name="color_texture" type="text" placeholder="Colors / textures in mind (e.g., pearl, opal, mist)" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <input name="inspiration_links" type="url" placeholder="Inspiration link (Pinterest, site, IG)" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+            <input name="competitor_links" type="url" placeholder="Competitor or peer link (optional)" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+          </div>
+          <textarea name="dream_outcome" rows="5" placeholder="Describe your dream outcome and what success looks like…" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve"></textarea>
+        </div>
+
+        <!-- Step 3: Technical -->
+        <div class="step" data-step="3">
+          <h3 class="font-serif text-xl text-mauve mb-2">Technical</h3>
+          <div class="grid md:grid-cols-2 gap-4">
+            <select name="preferred_platform" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+              <option value="" disabled selected>Preferred Platform</option>
+              <option>Static (HTML/Tailwind)</option><option>Webflow</option><option>Framer</option><option>WordPress</option><option>Not sure</option>
+            </select>
+            <input name="pages" type="text" placeholder="How many pages? (e.g., 1–5)" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="needs[]" value="Domain/Hosting" class="accent-mauve">Need domain/hosting help</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="needs[]" value="Copywriting" class="accent-mauve">Need copywriting help</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="needs[]" value="Photo/Asset Curation" class="accent-mauve">Need asset curation</label>
+            <label class="flex items-center gap-2 text-sm"><input type="checkbox" name="needs[]" value="Ongoing Care" class="accent-mauve">Maintenance plan</label>
+          </div>
+          <input name="asset_link" type="url" placeholder="Link to assets (Drive, Dropbox — optional)" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve">
+          <div>
+            <p class="text-sm text-mauve/80 mb-2">Features (pick any):</p>
+            <div class="grid md:grid-cols-2 gap-2 text-sm">
+              <label class="flex items-center gap-2"><input type="checkbox" name="features[]" value="Gallery/Lightbox" class="accent-mauve">Gallery / Lightbox</label>
+              <label class="flex items-center gap-2"><input type="checkbox" name="features[]" value="Audio/Player" class="accent-mauve">Audio Player</label>
+              <label class="flex items-center gap-2"><input type="checkbox" name="features[]" value="Blog/News" class="accent-mauve">Blog / News</label>
+              <label class="flex items-center gap-2"><input type="checkbox" name="features[]" value="Contact/Booking" class="accent-mauve">Contact / Booking</label>
+              <label class="flex items-center gap-2"><input type="checkbox" name="features[]" value="Shop/Checkout" class="accent-mauve">Shop / Checkout</label>
+              <label class="flex items-center gap-2"><input type="checkbox" name="features[]" value="Analytics/SEO" class="accent-mauve">Analytics + SEO</label>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4: Review & Submit -->
+        <div class="step" data-step="4">
+          <h3 class="font-serif text-xl text-mauve mb-2">Last Bits</h3>
+          <textarea name="notes" rows="5" placeholder="Anything else I should know? Links, deadlines, constraints…" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:ring-2 focus:ring-mauve"></textarea>
+          <label class="flex items-center gap-2 text-sm text-mauve/80">
+            <input type="checkbox" name="newsletter" class="accent-mauve"> Keep me posted about templates & openings
+          </label>
+          <p class="hint mt-2">After you submit, I’ll review and reply via email to schedule a discovery chat.</p>
+        </div>
+
+        <!-- Nav -->
+        <div class="flex items-center justify-between gap-3">
+          <button type="button" id="prevBtn" class="px-4 py-2 rounded-xl border border-mauve text-mauve hover-glow">Back</button>
+          <div class="flex gap-3">
+            <button type="button" id="nextBtn" class="px-4 py-2 rounded-xl bg-mauve text-white hover-glow">Next</button>
+            <button type="submit" id="submitBtn" class="hidden px-4 py-2 rounded-xl bg-mauve text-white hover-glow">Send Inquiry</button>
+          </div>
+        </div>
+
+        <!-- Status -->
+        <div id="formStatus" class="text-center text-sm mt-2"></div>
       </form>
-      <div class="mt-8 text-sm text-mauve/90">
-        <p><i class="fa-brands fa-instagram mr-2"></i>@glasscircuits</p>
-        <p class="mt-1">hello@glasscircuits.com</p>
-      </div>
+
+      <p class="text-center text-sm text-mauve/80 mt-6">Prefer email?  
+        <a href="mailto:glasscircuitsdesign@gmail.com" class="underline">glasscircuitsdesign@gmail.com</a>
+      </p>
     </div>
   </div>
 </section>
 
-<!-- Footer -->
 <footer class="py-10 text-center text-sm text-mauve/70">
-  © <span id="year"></span> GlassCircuits — Designed in Light.
+  © <span id="year2"></span> GlassCircuits — Designed by Emily.
 </footer>
 
+<!-- Scripts -->
 <script>
-  document.getElementById("year").textContent = new Date().getFullYear();
-</script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
+  // Years
+  document.getElementById("year1").textContent = new Date().getFullYear();
+  document.getElementById("year2").textContent = new Date().getFullYear();
 
+  // Intersection reveal
+  const reveals = document.querySelectorAll(".reveal");
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(e => { if (e.isIntersecting) e.target.classList.add("visible"); });
+  }, { threshold: 0.18, rootMargin: "0px 0px -40px 0px" });
+  reveals.forEach(el => io.observe(el));
+
+  // Filter logic
+  const filterBtns = document.querySelectorAll(".filter-btn");
+  const cards = document.querySelectorAll(".project-card");
+  filterBtns.forEach(btn => {
+    btn.addEventListener("click", () => {
+      filterBtns.forEach(b => b.classList.remove("bg-mauve","text-white","active"));
+      btn.classList.add("bg-mauve","text-white","active");
+      const f = btn.dataset.filter;
+      cards.forEach(c => {
+        const match = f === "all" || c.dataset.category === f;
+        c.style.transition = "opacity .25s ease, transform .25s ease";
+        if (match) {
+          c.classList.remove("hidden");
+          requestAnimationFrame(() => { c.style.opacity = "1"; c.style.transform = "scale(1)"; });
+        } else {
+          c.style.opacity = "0"; c.style.transform = "scale(.98)";
+          setTimeout(() => c.classList.add("hidden"), 200);
+        }
+      });
+    });
+  });
+
+  // Fullscreen mobile menu
+  const menuBtn = document.getElementById("menu-btn");
+  const overlay = document.getElementById("overlay");
+  const closeOverlay = document.getElementById("close-overlay");
+  const links = Array.from(overlay.querySelectorAll(".menu-link"));
+  function openMenu() {
+    overlay.style.opacity = "1";
+    overlay.style.pointerEvents = "auto";
+    document.body.classList.add("no-scroll");
+    menuBtn.classList.add("active");
+    menuBtn.setAttribute("aria-expanded","true");
+    links.forEach((l,i)=> setTimeout(()=> l.classList.add("show"), 60*i));
+  }
+  function closeMenu() {
+    overlay.style.opacity = "0";
+    overlay.style.pointerEvents = "none";
+    document.body.classList.remove("no-scroll");
+    menuBtn.classList.remove("active");
+    menuBtn.setAttribute("aria-expanded","false");
+    links.forEach(l=> l.classList.remove("show"));
+  }
+menuBtn.addEventListener("click", () => {
+  if (overlay.style.pointerEvents === "auto") closeMenu();
+  else openMenu();
+});
+closeOverlay.addEventListener("click", closeMenu);
+
+  // Multi-step intake form
+  const form = document.getElementById("intakeForm");
+  const steps = Array.from(form.querySelectorAll(".step"));
+  const nextBtn = document.getElementById("nextBtn");
+  const prevBtn = document.getElementById("prevBtn");
+  const submitBtn = document.getElementById("submitBtn");
+  const statusEl = document.getElementById("formStatus");
+  const progressBar = document.getElementById("progressBar");
+  let current = 0;
+
+  function updateUI() {
+    steps.forEach((s, i) => s.classList.toggle("active", i === current));
+    prevBtn.style.visibility = current === 0 ? "hidden" : "visible";
+    nextBtn.classList.toggle("hidden", current === steps.length - 1);
+    submitBtn.classList.toggle("hidden", current !== steps.length - 1);
+    progressBar.style.width = ((current + 1) / steps.length) * 100 + "%";
+    statusEl.textContent = "";
+  }
+  function validateStep() {
+    const reqs = steps[current].querySelectorAll("[required]");
+    let ok = true;
+    reqs.forEach(inp => {
+      if (!inp.value) { ok = false; inp.classList.add("error"); }
+      else inp.classList.remove("error");
+    });
+    return ok;
+  }
+  nextBtn.addEventListener("click", () => {
+    if (!validateStep()) { statusEl.textContent = "Please fill the required fields."; statusEl.className="text-red-700 text-sm text-center"; return; }
+    current = Math.min(current + 1, steps.length - 1);
+    updateUI();
+  });
+  prevBtn.addEventListener("click", () => {
+    current = Math.max(current - 1, 0);
+    updateUI();
+  });
+  updateUI();
+
+  // Submit via fetch to Formspree (enhanced UX)
+  form.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    submitBtn.disabled = true; submitBtn.textContent = "Sending…";
+    try {
+      const res = await fetch(form.action, { method: "POST", body: new FormData(form), headers: { "Accept": "application/json" }});
+      if (res.ok) {
+        statusEl.className = "text-green-700 text-sm text-center";
+        statusEl.textContent = "Thanks! Your inquiry has been sent. I’ll reply via email.";
+        form.reset(); current = 0; updateUI();
+      } else {
+        statusEl.className = "text-red-700 text-sm text-center";
+        statusEl.textContent = "Hmm, something went wrong. Email me at glasscircuitsdesign@gmail.com.";
+      }
+    } catch (err) {
+      statusEl.className = "text-red-700 text-sm text-center";
+      statusEl.textContent = "Network error — please email glasscircuitsdesign@gmail.com.";
+    } finally {
+      submitBtn.disabled = false; submitBtn.textContent = "Send Inquiry";
+    }
+  });
+</script>
 </body>
 </html>
