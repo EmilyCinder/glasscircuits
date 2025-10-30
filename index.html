@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>GlassCircuits — Neo-Fae Design Studio</title>
+  <meta name="description" content="GlassCircuits: angelic, ethereal EPKs and visual design — blending neo-fae aesthetics, PNW atmosphere, and soft glassmorphism." />
+  <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Playfair+Display:wght@600&display=swap" rel="stylesheet">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ["Manrope", "ui-sans-serif"], serif: ["Playfair Display", "serif"] },
+          colors: {
+            pearl: "#fcfbfd",
+            haze: "#f6f3f8",
+            lilac: "#d9c8e9",
+            mauve: "#b8a4ce",
+            rose: "#e7d5e5",
+            mist: "rgba(255,255,255,0.5)"
+          },
+          boxShadow: {
+            aurora: "0 0 60px rgba(216,200,230,0.25)",
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    html { scroll-behavior: smooth; }
+    body {
+      background: radial-gradient(1200px 700px at 50% -20%, rgba(200,180,220,0.15), transparent 60%), 
+                  linear-gradient(to bottom right, #faf9fb, #f7f4f8);
+      color: #3a2b45;
+    }
+    .glass {
+      background: rgba(255,255,255,0.55);
+      backdrop-filter: blur(20px) saturate(180%);
+      border: 1px solid rgba(255,255,255,0.45);
+      box-shadow: 0 8px 32px rgba(190,170,210,0.1);
+    }
+    .hover-glow { transition: all .25s ease; }
+    .hover-glow:hover { transform: translateY(-2px); filter: brightness(1.1); }
+    .halo {
+      background: radial-gradient(circle at 50% 40%, rgba(210,190,230,0.25), transparent 70%);
+    }
+  </style>
+</head>
+
+<body class="font-sans">
+
+<!-- Header -->
+<header class="fixed inset-x-0 top-0 z-50 bg-white/70 backdrop-blur-xl border-b border-white/40">
+  <div class="mx-auto max-w-7xl px-4 py-4 flex justify-between items-center">
+    <a href="#home" class="text-lg font-semibold tracking-wide text-mauve">GlassCircuits</a>
+    <nav class="hidden md:flex gap-6 text-sm text-mauve/90">
+      <a href="#about" class="hover-glow">About</a>
+      <a href="#services" class="hover-glow">Services</a>
+      <a href="#aura" class="hover-glow">Aesthetic</a>
+      <a href="#contact" class="hover-glow">Contact</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Hero -->
+<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 halo">
+  <h1 class="text-5xl md:text-6xl font-serif font-semibold text-mauve mb-4 leading-tight">Designs that Feel Like Light</h1>
+  <p class="text-mauve/80 text-lg max-w-xl">GlassCircuits creates ethereal EPKs and brand visuals that shimmer between digital and dream — where glass meets air and color meets quiet.</p>
+  <div class="mt-8 flex justify-center gap-4">
+    <a href="#aura" class="hover-glow rounded-xl bg-mauve text-white px-5 py-2.5 font-semibold shadow-aurora">See the Aesthetic</a>
+    <a href="#contact" class="hover-glow rounded-xl border border-mauve text-mauve px-5 py-2.5 font-semibold">Work Together</a>
+  </div>
+  <div class="mt-20 w-64 h-64 rounded-full bg-gradient-to-br from-rose via-lilac to-mauve opacity-40 blur-3xl absolute"></div>
+</section>
+
+<!-- About -->
+<section id="about" class="py-24 bg-pearl/70 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-br from-lilac/10 via-transparent to-rose/10 blur-3xl"></div>
+  <div class="max-w-5xl mx-auto px-6 glass rounded-3xl p-10 relative z-10">
+    <h2 class="text-3xl font-serif text-mauve mb-3">About GlassCircuits</h2>
+    <p class="text-mauve/80 leading-relaxed">
+      Born in the PNW fog, GlassCircuits is a studio for those who design from intuition and light.  
+      We craft press kits, brand systems, and ethereal visuals that shimmer like reflections — minimalist, fluid, and intentionally magical.  
+      Every piece feels like morning mist over quartz.
+    </p>
+  </div>
+</section>
+
+<!-- Services -->
+<section id="services" class="py-24 bg-gradient-to-b from-haze to-pearl">
+  <div class="max-w-6xl mx-auto px-6 text-center">
+    <h2 class="text-3xl font-serif text-mauve mb-6">Offerings</h2>
+    <p class="text-mauve/80 max-w-2xl mx-auto mb-12">Elegant tools for dreamers, artists, and brands — ethereal, professional, and spellbinding.</p>
+    <div class="grid md:grid-cols-3 gap-6">
+      <div class="glass p-6 rounded-2xl hover-glow">
+        <i class="fa-solid fa-scroll text-2xl text-mauve mb-3"></i>
+        <h3 class="font-semibold text-lg text-mauve">EPKs & Portfolios</h3>
+        <p class="text-sm text-mauve/80 mt-2">For musicians, artists, and creative professionals — crafted like modern relics of light.</p>
+      </div>
+      <div class="glass p-6 rounded-2xl hover-glow">
+        <i class="fa-solid fa-palette text-2xl text-mauve mb-3"></i>
+        <h3 class="font-semibold text-lg text-mauve">Visual Identity</h3>
+        <p class="text-sm text-mauve/80 mt-2">Logos, palettes, and typography — aligned with your aura and rhythm, minimalist yet luminous.</p>
+      </div>
+      <div class="glass p-6 rounded-2xl hover-glow">
+        <i class="fa-solid fa-sparkles text-2xl text-mauve mb-3"></i>
+        <h3 class="font-semibold text-lg text-mauve">Atmospheric Assets</h3>
+        <p class="text-sm text-mauve/80 mt-2">Social visuals, show flyers, launch templates — serene, misty, timeless.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Aesthetic Section -->
+<section id="aura" class="py-24 relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-transparent via-rose/15 to-lilac/10 blur-2xl"></div>
+  <div class="max-w-6xl mx-auto px-6 text-center relative z-10">
+    <h2 class="text-3xl font-serif text-mauve mb-6">The GlassCircuits Aura</h2>
+    <p class="text-mauve/80 max-w-2xl mx-auto mb-12">A moodboard of air, crystal, and code — inspired by Icelandic fog, fairy circuitry, and slow light.</p>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div class="glass rounded-3xl h-48 flex items-center justify-center">
+        <span class="text-mauve font-semibold">Soft Mauve</span>
+      </div>
+      <div class="glass rounded-3xl h-48 flex items-center justify-center">
+        <span class="text-mauve font-semibold">Ethereal Light</span>
+      </div>
+      <div class="glass rounded-3xl h-48 flex items-center justify-center">
+        <span class="text-mauve font-semibold">Pacific Mist</span>
+      </div>
+      <div class="glass rounded-3xl h-48 flex items-center justify-center">
+        <span class="text-mauve font-semibold">Pearl Tone</span>
+      </div>
+      <div class="glass rounded-3xl h-48 flex items-center justify-center">
+        <span class="text-mauve font-semibold">Crystal Blur</span>
+      </div>
+      <div class="glass rounded-3xl h-48 flex items-center justify-center">
+        <span class="text-mauve font-semibold">Aurora Glow</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Contact -->
+<section id="contact" class="py-24 bg-haze relative overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-tr from-lilac/20 via-transparent to-rose/20 blur-2xl"></div>
+  <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+    <div class="glass rounded-3xl p-10">
+      <h2 class="text-3xl font-serif text-mauve mb-4">Let’s Create Something Radiant</h2>
+      <p class="text-mauve/80 mb-8">Reach out to collaborate on your EPK, brand visuals, or creative project.  
+        Everything begins with light — and a good brief.</p>
+      <form class="max-w-md mx-auto grid gap-4 text-left">
+        <input type="text" placeholder="Your Name" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mauve">
+        <input type="email" placeholder="Your Email" class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mauve">
+        <textarea rows="5" placeholder="Tell me about your project..." class="w-full bg-white/60 border border-lilac rounded-xl px-4 py-3 focus:outline-none focus:ring-2 focus:ring-mauve"></textarea>
+        <button type="submit" class="hover-glow w-full bg-mauve text-white font-semibold rounded-xl py-3 shadow-aurora">Send Message</button>
+      </form>
+      <div class="mt-8 text-sm text-mauve/90">
+        <p><i class="fa-brands fa-instagram mr-2"></i>@glasscircuits</p>
+        <p class="mt-1">hello@glasscircuits.com</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer class="py-10 text-center text-sm text-mauve/70">
+  © <span id="year"></span> GlassCircuits — Designed in Light.
+</footer>
+
+<script>
+  document.getElementById("year").textContent = new Date().getFullYear();
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/js/all.min.js" crossorigin="anonymous"></script>
+
+</body>
+</html>
