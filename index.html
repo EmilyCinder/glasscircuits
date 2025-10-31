@@ -78,7 +78,7 @@
     <a href="#home" class="text-lg font-semibold tracking-wide text-mauve">GlassCircuits</a>
 
     <!-- Desktop Nav -->
-    <nav class="hidden md:flex gap-6 text-sm text-mauve/90">
+    <nav class="hidden md:flex gap-6 text-sm text-#6b4e7e/90">
       <a href="#about" class="hover-glow">About</a>
       <a href="#services" class="hover-glow">Services</a>
       <a href="#projects" class="hover-glow">Projects</a>
@@ -119,14 +119,40 @@
 </div>
 
 <!-- Hero -->
-<section id="home" class="min-h-screen flex flex-col justify-center items-center text-center px-6 relative">
-  <h1 class="text-5xl md:text-6xl font-serif font-semibold text-mauve mb-4 leading-tight">Designs that Feel Like Light</h1>
-  <p class="text-mauve/80 text-lg max-w-xl">Emily creates luminous digital experiences that blend art, technology, and atmosphere — for dreamers, artists, and storytellers.</p>
-  <div class="mt-8 flex justify-center gap-4">
-    <a href="#projects" class="hover-glow rounded-xl bg-mauve text-white px-5 py-2.5 font-semibold shadow-aurora">View Projects</a>
-    <a href="#contact" class="hover-glow rounded-xl border border-mauve text-mauve px-5 py-2.5 font-semibold">Start a Project</a>
+<!-- Hero -->
+<section id="home" 
+  class="relative min-h-screen flex flex-col justify-center items-center text-center px-6 overflow-hidden">
+  
+  <!-- Background Image -->
+  <div class="absolute inset-0">
+    <img src="images/hero.jpg" 
+         alt="Ethereal abstract background" 
+         class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-gradient-to-b from-[#d9c8e9]/40 via-[#b8a4ce]/20 to-white/70"></div>
+  </div>
+
+  <!-- Hero Text (Glass Container) -->
+  <div class="relative z-10 glass rounded-3xl px-8 py-10 max-w-2xl mx-auto backdrop-blur-xl bg-white/10 border border-white/30 shadow-aurora">
+    <h1 class="text-5xl md:text-6xl font-serif font-semibold text-white mb-4 leading-tight">
+      Designs that Feel Like Light
+    </h1>
+    <p class="text-white/80 text-lg max-w-xl mx-auto">
+      Emily creates luminous digital experiences that blend art, technology, and atmosphere — for dreamers, artists, and storytellers.
+    </p>
+    <div class="mt-8 flex justify-center gap-4">
+      <a href="#projects" class="hover-glow rounded-xl bg-mauve text-white px-5 py-2.5 font-semibold shadow-aurora">
+        View Projects
+      </a>
+     <a href="#contact" 
+   class="hover-glow rounded-xl border border-white text-white px-5 py-2.5 font-semibold transition hover:bg-white/10">
+   Start a Project
+</a>
+
+    </div>
   </div>
 </section>
+
+
 
 <!-- About -->
 <section id="about" class="py-24 bg-pearl/70 relative overflow-hidden">
@@ -173,48 +199,84 @@
 </section>
 
 <!-- Projects with Filters -->
-<section id="projects" class="py-24">
+<!-- Projects -->
+<section id="projects" class="py-24 relative">
   <div class="max-w-6xl mx-auto px-6 text-center">
     <h2 class="text-3xl font-serif text-mauve mb-6">Projects</h2>
-    <p class="text-mauve/80 max-w-2xl mx-auto mb-8">Filter by type — each card links directly to a live project.</p>
+    <p class="text-mauve/80 max-w-2xl mx-auto mb-8">
+      EPKs and creative features — luminous previews from GlassCircuits Design.
+    </p>
 
+    <!-- Filters -->
     <div class="flex flex-wrap justify-center gap-3 mb-12">
       <button class="filter-btn bg-mauve text-white px-4 py-2 rounded-xl font-medium active" data-filter="all">All</button>
-      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="web">Web</button>
-      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="brand">Brand</button>
-      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="epk">EPK</button>
+      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="epk">EPKs</button>
+      <button class="filter-btn border border-mauve text-mauve px-4 py-2 rounded-xl font-medium" data-filter="blog">Blog</button>
     </div>
 
+    <!-- Grid -->
     <div id="project-grid" class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
-      <!-- Web -->
-      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="web">
-        <a href="https://example.com/aurora-archive" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
-        <div class="h-40 rounded-xl bg-gradient-to-br from-rose to-lilac opacity-70 mb-4"></div>
-        <h3 class="text-mauve font-semibold text-lg">Aurora Archive</h3>
-        <p class="text-sm text-mauve/80 mt-1">Interactive portfolio for a multimedia artist.</p>
+
+      <!-- Blog -->
+      <article class="project-card relative glass rounded-2xl p-6 group hover-glow overflow-hidden" data-category="blog">
+        <a href="https://yourbloglink.com" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+        <div class="relative h-40 rounded-xl overflow-hidden mb-4">
+          <img src="images/blog-thumb.jpg" alt="Blog preview" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-mauve/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+        </div>
+        <h3 class="text-mauve font-semibold text-lg">Ethereal Design Journal</h3>
       </article>
-      <!-- Brand -->
-      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="brand">
-        <a href="https://example.com/liminal-light" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
-        <div class="h-40 rounded-xl bg-gradient-to-br from-lilac to-mauve opacity-70 mb-4"></div>
-        <h3 class="text-mauve font-semibold text-lg">Liminal Light</h3>
-        <p class="text-sm text-mauve/80 mt-1">Brand identity + microsite for an ambient project.</p>
+
+      <!-- EPK 1 -->
+      <article class="project-card relative glass rounded-2xl p-6 group hover-glow overflow-hidden" data-category="epk">
+        <a href="https://emilycinder.github.io/fern/" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+        <div class="relative h-40 rounded-xl overflow-hidden mb-4">
+          <img src="images/b9.png" alt="The Wooked Witch preview" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-mauve/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+        </div>
+        <h3 class="text-mauve font-semibold text-lg">The Wooked Witch</h3>
       </article>
-     
-      <!-- EPK -->
-<article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="epk">
-  <a href="https://emilycinder.github.io/fern/" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
-  <div class="h-40 rounded-xl bg-gradient-to-br from-rose to-lilac opacity-70 mb-4"></div>
-  <h3 class="text-mauve font-semibold text-lg">The Wooked Witch</h3>
+
+    <!-- EPK 2 -->
+<article class="project-card relative glass rounded-2xl p-6 group hover-glow overflow-hidden" data-category="epk">
+  <!-- Transparent link layer -->
+  <a href="https://emilycinder.github.io/BRITSPORTFOLIO/" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
+
+  <div class="relative h-40 rounded-xl overflow-hidden mb-4">
+    <img src="images/IMG_5666.JPG" alt="BRITSPORTFOLIO site preview" class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-mauve/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+  </div>
+
+  <h3 class="text-mauve font-semibold text-lg">Jiggles' Portfolio</h3>
 </article>
 
-      <!-- Web -->
-      <article class="project-card relative glass rounded-2xl p-6 reveal group hover-glow overflow-hidden" data-category="web">
-        <a href="https://example.com/frosted-grid" target="_blank" rel="noopener" class="absolute inset-0 z-10"></a>
-        <div class="h-40 rounded-xl bg-gradient-to-br from-lilac to-rose opacity-70 mb-4"></div>
-        <h3 class="text-mauve font-semibold text-lg">Frosted Grid</h3>
-        <p class="text-sm text-mauve/80 mt-1">Experimental responsive layout exploration.</p>
+      <!-- EPK 3 -->
+      <article class="project-card relative glass rounded-2xl p-6 group hover-glow overflow-hidden" data-category="epk">
+        <div class="relative h-40 rounded-xl overflow-hidden mb-4">
+          <img src="images/epk3-thumb.jpg" alt="EPK Three preview" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-mauve/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+        </div>
+        <h3 class="text-mauve font-semibold text-lg">EPK Three</h3>
       </article>
+
+      <!-- EPK 4 -->
+      <article class="project-card relative glass rounded-2xl p-6 group hover-glow overflow-hidden" data-category="epk">
+        <div class="relative h-40 rounded-xl overflow-hidden mb-4">
+          <img src="images/epk4-thumb.jpg" alt="EPK Four preview" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-mauve/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+        </div>
+        <h3 class="text-mauve font-semibold text-lg">EPK Four</h3>
+      </article>
+
+      <!-- EPK 5 -->
+      <article class="project-card relative glass rounded-2xl p-6 group hover-glow overflow-hidden" data-category="epk">
+        <div class="relative h-40 rounded-xl overflow-hidden mb-4">
+          <img src="images/epk5-thumb.jpg" alt="EPK Five preview" class="w-full h-full object-cover">
+          <div class="absolute inset-0 bg-mauve/40 transition-opacity duration-500 group-hover:opacity-0"></div>
+        </div>
+        <h3 class="text-mauve font-semibold text-lg">EPK Five</h3>
+      </article>
+
     </div>
   </div>
 </section>
